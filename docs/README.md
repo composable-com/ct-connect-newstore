@@ -1,0 +1,1 @@
+This connector has sample `event` & `job` applications 

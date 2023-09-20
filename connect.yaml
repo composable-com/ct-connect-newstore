@@ -1,0 +1,54 @@
+deployAs:
+  - name: job
+    applicationType: job
+    endpoint: /job
+    properties:
+      schedule: "*/5 * * * *"
+    configuration:
+      standardConfiguration:
+        - key: CTP_REGION
+          description: commercetools Composable Commerce API region
+      securedConfiguration:
+        - key: CTP_PROJECT_KEY
+          description: commercetools Composable Commerce project key
+        - key: CTP_CLIENT_ID
+          description: commercetools Composable Commerce client ID
+        - key: CTP_CLIENT_SECRET
+          description: commercetools Composable Commerce client secret
+        - key: CTP_SCOPE
+          description: commercetools Composable Commerce client scope
+        - key: NEW_STORE_BASE_URL
+          description: NewStore API base URL
+        - key: NEW_STORE_USERNAME
+          description: NewStore username
+        - key: NEW_STORE_PASSWORD
+          description: NewStore password
+        - key: NEW_STORE_SHOP
+          description: NewStore shop
+  - name: event
+    applicationType: event
+    endpoint: /event
+    scripts:
+      postDeploy: npm install && npm run build && npm run connector:post-deploy
+      preUndeploy: npm install && npm run build && npm run connector:pre-undeploy
+    configuration:
+      standardConfiguration:
+        - key: CTP_REGION
+          description: commercetools Composable Commerce API region
+      securedConfiguration:
+        - key: CTP_PROJECT_KEY
+          description: commercetools Composable Commerce project key
+        - key: CTP_CLIENT_ID
+          description: commercetools Composable Commerce client ID
+        - key: CTP_CLIENT_SECRET
+          description: commercetools Composable Commerce client secret
+        - key: CTP_SCOPE
+          description: commercetools Composable Commerce client scope
+        - key: NEW_STORE_BASE_URL
+          description: NewStore API base URL
+        - key: NEW_STORE_USERNAME
+          description: NewStore username
+        - key: NEW_STORE_PASSWORD
+          description: NewStore password
+        - key: NEW_STORE_SHOP
+          description: NewStore shop
