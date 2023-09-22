@@ -8,4 +8,6 @@ export const mockEnvironmentVariables = () => {
   process.env.NEW_STORE_USERNAME = 'xxxxxxxxxxx';
   process.env.NEW_STORE_PASSWORD = 'xxxxxxxxxxx';
   process.env.NEW_STORE_SHOP = 'xxxxxxxxxxx';
+  process.env.CONNECT_GCP_TOPIC_NAME = 'xxxxxxxxxxx';
+  process.env.CONNECT_GCP_PROJECT_ID = 'xxxxxxxxxxx';
 };

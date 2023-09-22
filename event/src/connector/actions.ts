@@ -7,30 +7,7 @@ export async function createOrderCreateSubscription(
   topicName: string,
   projectId: string
 ): Promise<void> {
-  const {
-    body: { results: subscriptions },
-  } = await apiRoot
-    .subscriptions()
-    .get({
-      queryArgs: {
-        where: `key = "${ORDER_CREATE_SUBSCRIPTION_KEY}"`,
-      },
-    })
-    .execute();
-
-  if (subscriptions.length > 0) {
-    const subscription = subscriptions[0];
-    await apiRoot
-      .subscriptions()
-      .withKey({ key: ORDER_CREATE_SUBSCRIPTION_KEY })
-      .delete({
-        queryArgs: {
-          version: subscription.version,
-        },
-      })
-      .execute();
-  }
-
+  await deleteOrderCreateSubscription(apiRoot);
   await apiRoot
     .subscriptions()
     .post({

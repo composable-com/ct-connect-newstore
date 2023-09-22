@@ -12,7 +12,7 @@
     "build": "rimraf ./build && tsc",
     "lint": "eslint . --ext .ts",
     "prettier": "prettier --write '**/*.{js,ts}'",
-    "test": "jest --config jest.config.cjs",
+    "test": "npm run prebuild && jest --config jest.config.cjs",
     "test:coverage": "jest --config jest.config.cjs --coverage --collectCoverageFrom='src/**/*.{ts,jxs}'",
     "test:watch": "jest --watch"
   },

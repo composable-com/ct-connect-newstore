@@ -37,7 +37,7 @@ export const post = async (_request: Request, response: Response) => {
     throw new CustomError(err.body?.statusCode ?? 500, 'error getting commercetools inventory: ' + err.message);
   });
 
-  const aggregateNewStoreStock = getAggregateStock(fullNewStoreInventory)
+  const aggregateNewStoreStock = getAggregateStock(fullNewStoreInventory);
 
   const results = new ResultsTracker();
 
@@ -75,5 +75,5 @@ export const post = async (_request: Request, response: Response) => {
     `Finished job run - results: updated: ${finalResults.updated.length} | created: ${finalResults.created.length} | error: ${finalResults.error.length}`
   );
 
-  response.status(200).send(results.getResults());
+  response.status(200).send(finalResults);
 };

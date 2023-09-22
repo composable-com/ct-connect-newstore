@@ -3,32 +3,25 @@ import nock from 'nock';
 import request from 'supertest';
 import app from '../src/app';
 import { createApiRoot } from '../src/client/create.client';
-import {
-  COMMERCETOOLS_STOCK_MOCK,
-  NEW_STORE_STOCK_MOCK,
-  NEW_STORE_TOKEN_RESPONSE_MOCK,
-  mockEnvironmentVariables,
-} from './mocks';
-const OLD_ENV = process.env;
+import { COMMERCETOOLS_STOCK_MOCK, NEW_STORE_STOCK_MOCK, NEW_STORE_TOKEN_RESPONSE_MOCK } from './mocks';
 
 jest.mock('../src/client/create.client');
 
-nock('https://test.newstore.net').post('/v0/token').reply(200, NEW_STORE_TOKEN_RESPONSE_MOCK);
+nock('https://test.newstore.net').post('/v0/token').reply(200, NEW_STORE_TOKEN_RESPONSE_MOCK).persist();
 
 nock('https://test.newstore.net')
   .get(/\/_\/v0\/hq\/stocked_products/)
-  .reply(200, NEW_STORE_STOCK_MOCK);
+  .reply(200, NEW_STORE_STOCK_MOCK)
+  .persist();
 
 describe('POST /job', () => {
   afterEach(() => {
     jest.clearAllMocks();
+    jest.restoreAllMocks();
     jest.resetModules();
-    process.env = { ...OLD_ENV };
   });
 
   test('Should run the job and return 200 with results', async () => {
-    mockEnvironmentVariables();
-
     (createApiRoot as jest.Mock).mockReturnValue({
       inventory: jest.fn(() => ({
         get: jest.fn(() => ({
@@ -71,7 +64,17 @@ describe('POST /job', () => {
     expect(response.body.error.length).toBe(0);
   });
 
-  test('Should return 500 when missing env variables', async () => {
+  test('Should return 500 when getting an unknown error fetching commercetools inventory', async () => {
+    (createApiRoot as jest.Mock).mockReturnValue({
+      inventory: jest.fn(() => ({
+        get: jest.fn(() => ({
+          execute: () => {
+            throw new Error('mocked error');
+          },
+        })),
+      })),
+    });
+
     const response = await request(app).post('/job').send();
     expect(response.statusCode).toBe(500);
   });

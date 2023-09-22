@@ -10,7 +10,10 @@ NewStore inventory will be synced into commercetools periodically.
 - The sync period can be configured in connect.yaml file (by default its set to run every 5 minutes).
 - commercetools and NewStore products are matched based on `sku`.
 - NewStore [ATP](https://docs.newstore.net/product/glossary/#glossary-ATP) is used to set commercetools's [available quantity](https://docs.commercetools.com/api/projects/inventory).
-- Inventory is aggregate, not store/channnel specific.
+- Inventory is aggregate, not store/location specific.
+- Inventory in commercetools is created without any associated channel.
+- To support a large catalog please look into implementing mechanisms such as batch/concurrent to process more records in parallel.
+
 
 ### Orders
 commercetools orders will be synced into NewStore.

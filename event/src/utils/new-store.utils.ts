@@ -14,7 +14,7 @@ export const castToNewStoreOrder = (order: CommercetoolsOrder): NewStoreOrderInj
     shop: readConfiguration().newStoreShop,
     channel_type: 'web',
     channel_name: 'commercetools',
-    shop_locale: order.locale || readConfiguration().fallbackLocale,
+    shop_locale: order.locale || 'en-US',
     currency: order.totalPrice.currencyCode,
     shipments: [
       {

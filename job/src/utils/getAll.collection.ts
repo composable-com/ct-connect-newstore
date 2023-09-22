@@ -2,11 +2,7 @@
 // @ts-nocheck
 function getAll(getFunction) {
   return async function getAll(queryArgs) {
-    async function recur(
-      { sort, limit = process.env.CTP_MAX_ITEMS, where },
-      lastResults: object | undefined = undefined,
-      results = []
-    ) {
+    async function recur({ sort, limit = 100, where }, lastResults: object | undefined = undefined, results = []) {
       const id = lastResults?.results?.slice(-1)[0]?.id;
 
       const { total, count } = lastResults || {};
