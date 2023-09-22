@@ -24,7 +24,7 @@ commercetools orders will be synced into NewStore.
 ## Pre-requisites
 - commercetools Account
 - [commercetools API keys](https://docs.commercetools.com/getting-started/create-api-client) (“Admin client”)
-- NewStore Account (username and password)
+- NewStore Account with admin permissions (username and password)
 - commercetools products data should have been imported into NewStore
 - commercetools products must have `sku`s and they should match NewStore's `product_id`
 - commercetools's shipping method `key`s should match NewStore's `service_level_identifier`s
