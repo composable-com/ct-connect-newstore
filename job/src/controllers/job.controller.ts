@@ -8,6 +8,7 @@ import { logger } from '../utils/logger.utils';
 import { ResultsTracker } from '../utils/results.utils';
 import { getAuthenticatedNewStoreClient, stockPageFetchService, getAllItems } from 'common-new-store';
 import { readConfiguration } from '../utils/config.utils';
+import { getAggregateStock } from '../utils/new-store-stock.utils';
 
 /**
  * Exposed job endpoint.
@@ -36,9 +37,11 @@ export const post = async (_request: Request, response: Response) => {
     throw new CustomError(err.body?.statusCode ?? 500, 'error getting commercetools inventory: ' + err.message);
   });
 
+  const aggregateNewStoreStock = getAggregateStock(fullNewStoreInventory)
+
   const results = new ResultsTracker();
 
-  for (const { sku, on_hand: newStoreStockAmount } of fullNewStoreInventory) {
+  for (const { sku, atp: newStoreStockAmount } of aggregateNewStoreStock) {
     if (!sku) continue;
     try {
       const commercetoolsInventoryEntry = fullCommercetoolsInventory.results.find((ctStock) => ctStock.sku === sku);

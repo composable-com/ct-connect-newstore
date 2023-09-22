@@ -7,26 +7,28 @@ export interface AccessTokenTokenServiceResponse {
 }
 
 export interface StockPageFetchServiceResponse {
-  items: {
-    allocations: number;
-    atp: number;
-    compound_id: string;
-    currency: string;
-    fulfillment_node_id: string;
-    future_atp: number;
-    on_hand: number;
-    present_atp: number;
-    price: number;
-    product_id: string;
-    safety_stock: number;
-    sku: string;
-    title: string;
-  }[];
+  items: NewStoreStockEntry[];
   pagination_info: {
     count: number;
     total: number;
     offset: number;
   };
+}
+
+export interface NewStoreStockEntry {
+  allocations: number;
+  atp: number;
+  compound_id: string;
+  currency: string;
+  fulfillment_node_id: string;
+  future_atp: number;
+  on_hand: number;
+  present_atp: number;
+  price: number;
+  product_id: string;
+  safety_stock: number;
+  sku: string;
+  title: string;
 }
 
 export interface NewStoreOrderInjectionBody {

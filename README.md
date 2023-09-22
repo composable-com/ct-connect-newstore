@@ -9,8 +9,8 @@ This connector syncs commercetools and NewStore data. Supports 1 commercetools p
 NewStore inventory will be synced into commercetools periodically.
 - The sync period can be configured in connect.yaml file (by default its set to run every 5 minutes).
 - commercetools and NewStore products are matched based on `sku`.
-- NewStore [stock on hand](https://docs.newstore.net/product/glossary/#glossary-SOH) is used to set commercetools's [available quantity](https://docs.commercetools.com/api/projects/inventory).
-- Inventory is is aggregate, not store/channnel specific.
+- NewStore [ATP](https://docs.newstore.net/product/glossary/#glossary-ATP) is used to set commercetools's [available quantity](https://docs.commercetools.com/api/projects/inventory).
+- Inventory is aggregate, not store/channnel specific.
 
 ### Orders
 commercetools orders will be synced into NewStore.
