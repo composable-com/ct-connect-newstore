@@ -1,6 +1,10 @@
-# commercetools NewStore connector
+# NewStore commercetools connector
 
 ![commercetools NewStore connector](./_logos.jpeg)
+
+The NewStore commercetools connector was created by [Orium](https://orium.com/), and provides the following features:
+- Ability to capture customer order events from commercetools to NewStore, including payment transaction details and shipping method
+- Ability to automatically synchronize global Available to Purchase (ATP) inventory from NewStore to commercetools through a scheduled task
 
 ## Overview
 This connector syncs commercetools and NewStore data. Supports 1 commercetools project and 1 NewStore shop.
